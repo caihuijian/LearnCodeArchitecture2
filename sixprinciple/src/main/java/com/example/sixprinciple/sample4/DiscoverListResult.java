@@ -1,4 +1,4 @@
-package com.example.sixprinciple.sanple4;
+package com.example.sixprinciple.sample4;
 
 import java.util.List;
 

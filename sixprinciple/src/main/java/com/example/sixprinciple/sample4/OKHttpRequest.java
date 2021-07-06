@@ -1,4 +1,4 @@
-package com.example.sixprinciple.sample3;
+package com.example.sixprinciple.sample4;
 
 import android.content.Context;
 import android.text.TextUtils;
@@ -16,13 +16,17 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 
-public class HttpUtils {
-    private static String TAG = "Sample3";
+public class OKHttpRequest {
+    private static final String TAG = "Sample4.OKHttpRequest";
+    private SPHttpCache mHttpCache;
 
-    private HttpUtils() {
+    public OKHttpRequest() {
+        mHttpCache = new SPHttpCache();
     }
 
-    public static <T> void get(Context context, String url, Map<String, Object> params, final HttpCallBack<T> callback, final boolean cache) {
+    // 参数还是很多
+    public <T> void get(Context context, String url, Map<String, Object> params,
+                        final HttpCallBack<T> callback, final boolean cache) {
         OkHttpClient mOkHttpClient = new OkHttpClient();
         // 公共参数
         params.put("app_name", "joke_essay");
@@ -37,16 +41,11 @@ public class HttpUtils {
         params.put("device_platform", "android");
 
         final String jointUrl = Utils.jointParams(url, params);  //打印
-
-        Log.e(TAG, " url: " + jointUrl);
         // 缓存问题
-        // 缓存写到  SP 里面, 考虑多级缓存(比如说 最经常使用的放在内存中,2天内使用的数据放在数据库，其余放在文件中 )
-        final String cacheJson = (String) PreferencesUtil.getInstance().getParam(jointUrl, "");
-        // 写一大堆多级缓存处理逻辑,内存怎么扩展等等
-        // 这里只考虑了一级缓存
-
+        Log.e(TAG, "request: mUrl "+jointUrl); // 缓存写到  SP 里面，多级缓存（内存中 30条,数据库 ，文件中 ）
+        final String cacheJson = mHttpCache.getCache(jointUrl);
+        // 写一大堆处理逻辑 ，内存怎么扩展等等
         if (cache && !TextUtils.isEmpty(cacheJson)) {
-            // 从缓存中取得数据
             Gson gson = new Gson();
             // data:{"name","darren"}   data:"请求失败"
             T objResult = (T) gson.fromJson(cacheJson,
@@ -54,7 +53,6 @@ public class HttpUtils {
             callback.onSuccess(objResult);
         }
 
-        // 同时并行得实时查询cloud数据
         Request.Builder requestBuilder = new Request.Builder().url(jointUrl).tag(context);
         //可以省略，默认是GET请求
         Request request = requestBuilder.build();
@@ -72,7 +70,6 @@ public class HttpUtils {
 
                 Log.e(TAG, resultJson.equals(cacheJson) + "");
                 if (cache && resultJson.equals(cacheJson)) {
-                    // 缓存数据与cloud数据相同 直接返回
                     return;
                 }
                 // 1.JSON解析转换
@@ -93,8 +90,9 @@ public class HttpUtils {
                 if (objResult != null) {
                     callback.onSuccess(objResult);
                 }
-                if (cache) {// 缓存数据
-                    PreferencesUtil.getInstance().saveParam(jointUrl, resultJson);
+
+                if (cache) {
+                    mHttpCache.saveCache(jointUrl, resultJson);
                 }
             }
         });

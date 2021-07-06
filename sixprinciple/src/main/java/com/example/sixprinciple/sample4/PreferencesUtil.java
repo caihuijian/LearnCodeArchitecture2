@@ -1,4 +1,4 @@
-package com.example.sixprinciple.sanple4;
+package com.example.sixprinciple.sample4;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -168,6 +168,7 @@ public class PreferencesUtil {
         saveParam("isLogin", isLogin);
     }
 
+    // 获取序列化对象
     public Object getObject(String key) {
         String wordBase64 = preferences.getString(key, "");
         byte[] base64 = Base64.decode(wordBase64.getBytes(), Base64.DEFAULT);
