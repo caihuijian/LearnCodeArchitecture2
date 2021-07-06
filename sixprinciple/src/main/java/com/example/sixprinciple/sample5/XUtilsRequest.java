@@ -7,28 +7,26 @@ import android.util.Log;
 import com.example.sixprinciple.Utils;
 import com.google.gson.Gson;
 
-import java.io.IOException;
+import org.xutils.http.RequestParams;
+import org.xutils.x;
+
 import java.util.Map;
 
-import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
-import okhttp3.Response;
 
-public class OKHttpRequest implements IHttpRequest{
-    private static final String TAG = "Sample4.OKHttpRequest";
+public class XUtilsRequest implements IHttpRequest {
+    private static final String TAG = "Sample5.XUtilsRequest";
     private SPHttpCache mHttpCache;
 
-    public OKHttpRequest() {
+    public XUtilsRequest() {
         mHttpCache = new SPHttpCache();
     }
 
     // 参数还是很多
-    @Override
     public <T> void get(Context context, String url, Map<String, Object> params,
                         final HttpCallBack<T> callback, final boolean cache) {
-        OkHttpClient mOkHttpClient = new OkHttpClient();
         // 公共参数
         params.put("app_name", "joke_essay");
         params.put("version_name", "5.7.0");
@@ -41,9 +39,8 @@ public class OKHttpRequest implements IHttpRequest{
         params.put("latitude", "28.171377");
         params.put("device_platform", "android");
 
-        final String jointUrl = Utils.jointParams(url, params);  //打印
+        final String jointUrl = Utils.jointParams(url, params);
         // 缓存问题
-        Log.e(TAG, "request: mUrl "+jointUrl); // 缓存写到  SP 里面，多级缓存（内存中 30条,数据库 ，文件中 ）
         final String cacheJson = mHttpCache.getCache(jointUrl);
         // 写一大堆处理逻辑 ，内存怎么扩展等等
         if (cache && !TextUtils.isEmpty(cacheJson)) {
@@ -54,47 +51,30 @@ public class OKHttpRequest implements IHttpRequest{
             callback.onSuccess(objResult);
         }
 
-        Request.Builder requestBuilder = new Request.Builder().url(jointUrl).tag(context);
-        //可以省略，默认是GET请求
-        Request request = requestBuilder.build();
-
-        mOkHttpClient.newCall(request).enqueue(new Callback() {
+        Log.e(TAG, "request: mUrl " + jointUrl);
+        RequestParams requestParams = new RequestParams();
+        requestParams.setUri(jointUrl);
+        x.http().get(requestParams, new org.xutils.common.Callback.CommonCallback<String>() {
             @Override
-            public void onFailure(Call call, final IOException e) {
-                // 失败
-                callback.onFailure(e);
+            public void onSuccess(String result) {
+                Log.e(TAG, "onSuccess: " + result);
             }
 
             @Override
-            public void onResponse(Call call, Response response) throws IOException {
-                final String resultJson = response.body().string();
+            public void onError(Throwable ex, boolean isOnCallback) {
+                Log.e(TAG, "onSuccess: " + ex.getMessage());
+                ex.printStackTrace();
+            }
 
-                Log.e(TAG, resultJson.equals(cacheJson) + "");
-                if (cache && resultJson.equals(cacheJson)) {
-                    return;
-                }
-                // 1.JSON解析转换
-                // 2.显示列表数据
-                // 3.缓存数据
-                Gson gson = new Gson();
-                // data:{"name","darren"}   data:"请求失败"
-                T objResult;
-                try {
-                    objResult = (T) gson.fromJson(resultJson,
-                            Utils.analysisClazzInfo(callback));
-                } catch (Exception e) {
-                    Log.e(TAG, "onResponse: " + e.getMessage());
-                    e.printStackTrace();
-                    return;
-                }
+            @Override
+            public void onCancelled(CancelledException cex) {
+                Log.e(TAG, "onCancelled: " + cex.getMessage());
+                cex.printStackTrace();
+            }
 
-                if (objResult != null) {
-                    callback.onSuccess(objResult);
-                }
-
-                if (cache) {
-                    mHttpCache.saveCache(jointUrl, resultJson);
-                }
+            @Override
+            public void onFinished() {
+                Log.e(TAG, "onFinished: ");
             }
         });
     }

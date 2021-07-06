@@ -8,13 +8,12 @@ import com.example.sixprinciple.ConstantValue;
 import com.example.sixprinciple.R;
 
 public class MainActivity extends AppCompatActivity {
-    private static final String TAG = "Sample4.MainActivity";
+    private static final String TAG = "Sample5.MainActivity";
 
     /**
-     * Sample4 比起Sample3
-     * 1.HttpUtils使用了builder设计模式
-     * 2.将请求单独新建为OKHttpRequest 与 HttpUtils分离 结构更清晰
-     * 同时 缓存部分也新建为一个类 与 HttpUtils分离
+     * Sample5 比起Sample4
+     * 1.面向接口编程 HttpUtils中的IHttpRequest是一个接口 可以被赋值为任意接口实现者 如果需要切换引擎 十分方便
+     * 同时提供了XUtils的请求 使用XUtils访问网络 可以灵活切换使用的网络引擎
      */
 
     @Override
@@ -23,7 +22,9 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         /********************访问网络开始*******************/
-        HttpUtils.with(this).cache(true).get().param("iid", 6152551759L).param("aid", 7).url(ConstantValue.UrlConstant.HOME_DISCOVERY_URL).request(
+        HttpUtils.with(this).cache(true).get()
+                //.httpRequest(new XUtilsRequest())//中途切换引擎
+                .param("iid", 6152551759L).param("aid", 7).url(ConstantValue.UrlConstant.HOME_DISCOVERY_URL).request(
                 new HttpCallBack<DiscoverListResult>() {
                     @Override
                     public void onSuccess(DiscoverListResult result) {

@@ -7,7 +7,10 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class HttpUtils {
-    private OKHttpRequest mHttpRequest;
+    // 面向接口编程
+    private IHttpRequest mHttpRequest;
+    // 可以中途切换Http引擎 比如换成Xutils
+    private static IHttpRequest mInitHttpRequest;
     private final int TYPE_POST = 0x0011, TYPE_GET = 0x0022;
     private int mType = TYPE_GET;
     // 用于临时存储参数
@@ -16,7 +19,7 @@ public class HttpUtils {
     private boolean mCache = false;
     private Context mContext;
 
-    private static String TAG = "Sample4";
+    private static String TAG = "Sample5";
 
     // 使用了builder设计模式
     public static HttpUtils with(Context context) {
@@ -27,6 +30,17 @@ public class HttpUtils {
         mHttpRequest = new OKHttpRequest();
         mParams = new HashMap<>();
         this.mContext = context;
+    }
+
+    // 提供给外部初始化Http引擎的接口
+    public static void initHttpRequest(IHttpRequest httpRequest) {
+        mInitHttpRequest = httpRequest;
+    }
+
+    // 提供给外部用于切换引擎的接口
+    public HttpUtils httpRequest(IHttpRequest httpRequest){
+        mHttpRequest = httpRequest;
+        return this;
     }
 
     public HttpUtils param(String key, Object value) {
@@ -49,6 +63,9 @@ public class HttpUtils {
     }
 
     public <T> void request(final HttpCallBack<T> callback) {
+        if(mHttpRequest == null){
+            mHttpRequest = mInitHttpRequest;
+        }
         // 异常判断
         if (mContext == null) {
             Log.e(TAG, "request: mContext is null,请调用with方法！");
