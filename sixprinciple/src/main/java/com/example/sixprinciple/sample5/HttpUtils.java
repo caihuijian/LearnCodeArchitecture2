@@ -7,9 +7,10 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class HttpUtils {
-    // 面向接口编程
-    private IHttpRequest mHttpRequest;
+    // 重点 面向接口编程 使用IHttpRequest接口对象 而不是实现类
     // 可以中途切换Http引擎 比如换成Xutils
+    private IHttpRequest mHttpRequest;
+    //初始化Http引擎
     private static IHttpRequest mInitHttpRequest;
     private final int TYPE_POST = 0x0011, TYPE_GET = 0x0022;
     private int mType = TYPE_GET;
@@ -37,7 +38,7 @@ public class HttpUtils {
         mInitHttpRequest = httpRequest;
     }
 
-    // 提供给外部用于切换引擎的接口
+    // 重点：提供给外部用于切换引擎的接口
     public HttpUtils httpRequest(IHttpRequest httpRequest){
         mHttpRequest = httpRequest;
         return this;

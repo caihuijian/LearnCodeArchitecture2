@@ -97,4 +97,9 @@ public class OKHttpRequest {
             }
         });
     }
+
+    public <T> void post(Context context, String url, Map<String, Object> params,
+                        final HttpCallBack<T> callback, final boolean cache) {
+        //空实现
+    }
 }

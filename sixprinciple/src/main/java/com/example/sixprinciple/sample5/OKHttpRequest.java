@@ -18,7 +18,7 @@ import okhttp3.Response;
 
 public class OKHttpRequest implements IHttpRequest{
     private static final String TAG = "Sample4.OKHttpRequest";
-    private SPHttpCache mHttpCache;
+    private ICache mHttpCache;
 
     public OKHttpRequest() {
         mHttpCache = new SPHttpCache();

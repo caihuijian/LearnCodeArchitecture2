@@ -1,8 +1,5 @@
 package com.example.sixprinciple.sample4;
 
-/**
- * Created by hcDarren on 2017/8/26.
- */
 
 public class SPHttpCache {
     public void saveCache(String finalUrl,String resultJson){

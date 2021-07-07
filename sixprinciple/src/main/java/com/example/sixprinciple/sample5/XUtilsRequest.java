@@ -18,7 +18,7 @@ import okhttp3.Request;
 
 public class XUtilsRequest implements IHttpRequest {
     private static final String TAG = "Sample5.XUtilsRequest";
-    private SPHttpCache mHttpCache;
+    private ICache mHttpCache;
 
     public XUtilsRequest() {
         mHttpCache = new SPHttpCache();

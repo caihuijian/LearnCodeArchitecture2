@@ -53,7 +53,11 @@ public class HttpUtils {
         if (mContext == null) {
             Log.e(TAG, "request: mContext is null,请调用with方法！");
         }
-        mHttpRequest.get(mContext, mUrl, mParams, callback, mCache);
+        if (mType == TYPE_GET) {
+            mHttpRequest.get(mContext, mUrl, mParams, callback, mCache);
+        } else {
+            mHttpRequest.post(mContext, mUrl, mParams, callback, mCache);
+        }
     }
 
     public HttpUtils get() {

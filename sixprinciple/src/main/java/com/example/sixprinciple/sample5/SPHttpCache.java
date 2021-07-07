@@ -1,10 +1,6 @@
 package com.example.sixprinciple.sample5;
 
-/**
- * Created by hcDarren on 2017/8/26.
- */
-
-public class SPHttpCache {
+public class SPHttpCache implements ICache{
     public void saveCache(String finalUrl,String resultJson){
         PreferencesUtil.getInstance().saveParam(finalUrl,resultJson);
     }
