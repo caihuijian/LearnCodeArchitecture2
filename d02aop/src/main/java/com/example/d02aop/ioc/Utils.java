@@ -1,4 +1,4 @@
-package com.example.d02aop;
+package com.example.d02aop.ioc;
 
 import android.content.Context;
 import android.net.ConnectivityManager;

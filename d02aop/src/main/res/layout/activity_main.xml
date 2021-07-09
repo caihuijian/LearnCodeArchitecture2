@@ -22,4 +22,20 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="check network3"/>
+
+    <Button
+        android:onClick="click1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="AOP check network1"/>
+    <Button
+        android:onClick="click2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="AOP check network2"/>
+    <Button
+        android:onClick="click3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="AOP check network3"/>
 </LinearLayout>
