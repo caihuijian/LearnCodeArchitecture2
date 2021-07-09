@@ -26,32 +26,32 @@ public class SectionAspect {
 
     /**
      * 找到处理的切点
-     * * *(..)  可以处理所有的方法
+     * * *(..)  可以处理所有的方法，不管方法有多少参数
      */
     @Pointcut("execution(@com.example.d02aop.aop.AOPCheckNet * *(..))")
-    public void checkNetBehavior() {
+    public void needCheckNetwork() {
 
     }
 
     /**
      * 处理切面
      */
-    @Around("checkNetBehavior()")
+    @Around("needCheckNetwork()")
     public Object checkNet(ProceedingJoinPoint joinPoint) throws Throwable {
         Log.e(TAG, "checkNet");
         // AOP用于做埋点  可以做日志上传  权限检测 网络检测等
-        // 1.获取 CheckNet 注解 调用Java 方法
+        // 1.获取 AOPCheckNet 注解所在的方法
         MethodSignature signature = (MethodSignature) joinPoint.getSignature();
         AOPCheckNet checkNet = signature.getMethod().getAnnotation(AOPCheckNet.class);
         if (checkNet != null) {
             // 2.判断有没有网络
             Object object = joinPoint.getThis();// View Activity Fragment:getThis() 当前切点方法所在的类 是activity或者fragment或者view
-            Context context = getContext(object);
+            Context context = getContext(object);// 获取上下文 用于判断网络状态
             if (context != null) {
                 if (!isNetworkAvailable(context)) {
                     // 3.没有网络不要往下执行
                     Toast.makeText(context, "请检查您的网络", Toast.LENGTH_SHORT).show();
-                    return null;
+                    return null;// 阻断执行
                 }
             }
         }

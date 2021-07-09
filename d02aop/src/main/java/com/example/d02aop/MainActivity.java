@@ -19,11 +19,6 @@ public class MainActivity extends AppCompatActivity {
         ViewUtils.injectActivity(MainActivity.this);
     }
 
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-    }
-
     @CheckNetThenClick(R.id.button1)
     public void network1() {
         Toast.makeText(MainActivity.this,"访问网络1！",Toast.LENGTH_SHORT).show();
