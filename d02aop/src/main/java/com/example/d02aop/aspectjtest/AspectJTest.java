@@ -11,6 +11,7 @@ import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 
+import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.After;
 import org.aspectj.lang.annotation.Around;
@@ -34,13 +35,13 @@ public class AspectJTest {
     // (..)  ()代表这个方法的参数，你可以指定类型，例如android.os.Bundle，或者(..)这样来代表任意类型、任意个数的参数
     // public void onMethodBefore(JoinPoint joinPoint) throws Throwable：实际切入的代码
     @Before("execution(* com.example.d02aop.MainActivity.before(..))")
-    public void onMethodBefore(ProceedingJoinPoint joinPoint) throws Throwable {
+    public void onMethodBefore(JoinPoint joinPoint) throws Throwable {
         Log.d(TAG, "printLog for before");
     }
 
     @After("execution(* com.example.d02aop.MainActivity.after(..))")
-    public void onMethodAfter(ProceedingJoinPoint joinPoint) throws Throwable {
-        Log.d(TAG, "printLog for before");
+    public void onMethodAfter(JoinPoint joinPoint) throws Throwable {
+        Log.d(TAG, "printLog for after");
     }
 
     @Around("execution(* com.example.d02aop.MainActivity.around(..))")
