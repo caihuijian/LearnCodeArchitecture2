@@ -3,6 +3,7 @@ package com.example.d02aop;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
@@ -11,6 +12,8 @@ import com.example.d02aop.ioc.CheckNetThenClick;
 import com.example.d02aop.ioc.ViewUtils;
 
 public class MainActivity extends AppCompatActivity {
+
+    private static final String TAG = "hjcai";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,5 +50,17 @@ public class MainActivity extends AppCompatActivity {
     @AOPCheckNet
     public void click3(View view) {
         Toast.makeText(MainActivity.this,"click3 访问网络3！",Toast.LENGTH_SHORT).show();
+    }
+
+    public void before(View view) {
+        Log.e(TAG, "before: ");
+    }
+
+    public void after(View view) {
+        Log.e(TAG, "after: ");
+    }
+
+    public void around(View view) {
+        Log.e(TAG, "around: ");
     }
 }
