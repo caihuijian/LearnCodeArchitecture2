@@ -2,3 +2,4 @@ rootProject.name = "CodeArchitecture2"
 include ':app'
 include ':sixprinciple'
 include ':d02aop'
+include ':d03uml'
