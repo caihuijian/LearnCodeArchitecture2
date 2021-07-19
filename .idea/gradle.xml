@@ -16,6 +16,9 @@
             <option value="$PROJECT_DIR$/d03uml" />
             <option value="$PROJECT_DIR$/d04reflectgeneric" />
             <option value="$PROJECT_DIR$/d05selfbutterknife" />
+            <option value="$PROJECT_DIR$/self-butterknife" />
+            <option value="$PROJECT_DIR$/self-butterknife-annotations" />
+            <option value="$PROJECT_DIR$/self-butterknife-compiler" />
             <option value="$PROJECT_DIR$/sixprinciple" />
           </set>
         </option>

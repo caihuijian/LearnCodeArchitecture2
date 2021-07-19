@@ -1,6 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="CompilerConfiguration">
-    <bytecodeTargetLevel target="1.8" />
+    <bytecodeTargetLevel target="1.7">
+      <module name="CodeArchitecture2.app" target="1.8" />
+      <module name="CodeArchitecture2.d02aop" target="1.8" />
+      <module name="CodeArchitecture2.d03uml" target="1.8" />
+      <module name="CodeArchitecture2.d04reflectgeneric" target="1.8" />
+      <module name="CodeArchitecture2.d05selfbutterknife" target="1.8" />
+      <module name="CodeArchitecture2.self-butterknife" target="1.8" />
+      <module name="CodeArchitecture2.self-butterknife-annotations" target="1.8" />
+      <module name="CodeArchitecture2.sixprinciple" target="1.8" />
+    </bytecodeTargetLevel>
   </component>
 </project>
