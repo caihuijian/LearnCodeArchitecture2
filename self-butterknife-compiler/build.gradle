@@ -6,3 +6,14 @@ java {
     sourceCompatibility = JavaVersion.VERSION_1_7
     targetCompatibility = JavaVersion.VERSION_1_7
 }
+
+// 引入Java Poet 用于生成代码
+dependencies {
+    implementation 'com.google.auto.service:auto-service:1.0-rc3'
+    implementation 'com.squareup:javapoet:1.11.1'
+}
+
+// 注释可以使用中文
+tasks.withType(JavaCompile){
+    options.encoding='UTF-8'
+}

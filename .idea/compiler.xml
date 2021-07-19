@@ -9,6 +9,7 @@
       <module name="CodeArchitecture2.d05selfbutterknife" target="1.8" />
       <module name="CodeArchitecture2.self-butterknife" target="1.8" />
       <module name="CodeArchitecture2.self-butterknife-annotations" target="1.8" />
+      <module name="CodeArchitecture2.self-butterknife-client" target="1.8" />
       <module name="CodeArchitecture2.sixprinciple" target="1.8" />
     </bytecodeTargetLevel>
   </component>
