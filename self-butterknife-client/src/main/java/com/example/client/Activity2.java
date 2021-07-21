@@ -6,10 +6,12 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.self_butterknife_annotations.BindView;
 import com.example.self_butterknife_client.R;
 
 public class Activity2 extends AppCompatActivity {
     TextView mTextView;
+
 
     Button mButton;
 
@@ -22,6 +24,7 @@ public class Activity2 extends AppCompatActivity {
         //mTextView.setText("Activity2-butter-tv2");
         //mButton.setText("Activity2-butter-button2");
     }
+
 
     @Override
     protected void onDestroy() {

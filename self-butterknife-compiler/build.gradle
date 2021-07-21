@@ -9,8 +9,14 @@ java {
 
 // 引入Java Poet 用于生成代码
 dependencies {
-    implementation 'com.google.auto.service:auto-service:1.0-rc3'
+    // 用于自动为 JAVA Processor 生成 META-INF 信息
+    implementation 'com.google.auto.service:auto-service:1.0-rc6'
+    // 指定当前module的processor
+    annotationProcessor 'com.google.auto.service:auto-service:1.0-rc6'
+    //快速生成.java文件的库
     implementation 'com.squareup:javapoet:1.11.1'
+//    implementation 'com.google.auto:auto-common:0.10'
+    implementation project(path: ':self-butterknife-annotations')
 }
 
 // 注释可以使用中文

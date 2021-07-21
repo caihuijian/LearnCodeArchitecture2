@@ -7,11 +7,14 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.self_butterknife_annotations.BindView;
 import com.example.self_butterknife_client.MainActivity_ViewBinding;
 import com.example.self_butterknife_client.R;
 
 public class MainActivity extends AppCompatActivity {
+    @BindView(R.id.tv1)
     TextView mTextView;
+
 
     Button mButton;
 
