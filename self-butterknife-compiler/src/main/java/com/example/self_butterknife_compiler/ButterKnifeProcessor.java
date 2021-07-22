@@ -123,6 +123,8 @@ public class ButterKnifeProcessor extends AbstractProcessor {
             MethodSpec.Builder constructorMethodBuilder = MethodSpec.constructorBuilder()
                     // 给构造方法添加一个参数类型为activityClassName 值为target的参数
                     .addParameter(activityClassName, "target")
+                    // 构造方法是public的
+                    .addModifiers(Modifier.PUBLIC)
                     // 构造方法添加一行代码 this.target = target;
                     .addStatement("this.target = target");
             // 遍历添加相关注解的变量

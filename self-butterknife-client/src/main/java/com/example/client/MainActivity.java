@@ -10,7 +10,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.self_butterknife.ButterKnife;
 import com.example.self_butterknife.Unbinder;
 import com.example.self_butterknife_annotations.BindView;
-import com.example.self_butterknife_client.MainActivity_ViewBinding;
 import com.example.self_butterknife_client.R;
 
 public class MainActivity extends AppCompatActivity {
