@@ -7,6 +7,8 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.self_butterknife.ButterKnife;
+import com.example.self_butterknife.Unbinder;
 import com.example.self_butterknife_annotations.BindView;
 import com.example.self_butterknife_client.MainActivity_ViewBinding;
 import com.example.self_butterknife_client.R;
@@ -15,15 +17,18 @@ public class MainActivity extends AppCompatActivity {
     @BindView(R.id.tv1)
     TextView mTextView;
 
-
+    @BindView(R.id.button1)
     Button mButton;
+
+    Unbinder unbinder;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        //mTextView.setText("Activity1-butter-tv1");
-        //mButton.setText("Activity1-butter-button1");
+        unbinder = ButterKnife.bind(this);
+        mTextView.setText("Activity1-butter-tv1");
+        mButton.setText("Activity1-butter-button1");
     }
 
     void buttonClick() {
@@ -34,5 +39,6 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        unbinder.unbind();
     }
 }
