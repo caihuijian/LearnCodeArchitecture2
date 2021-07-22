@@ -16,6 +16,7 @@ public class ButterKnife {
             Class<? extends Unbinder> bindClassName = (Class<? extends Unbinder>)
                     Class.forName(activity.getClass().getName() + "_ViewBinding");
             // 构造函数
+            // 通过反射调用 类似MainActivity_ViewBinding bind = new MainActivity_ViewBinding(this); 的构造方法
             Constructor<? extends Unbinder> bindConstructor = bindClassName.getDeclaredConstructor(activity.getClass());
             // 返回 Unbinder
             return bindConstructor.newInstance(activity);

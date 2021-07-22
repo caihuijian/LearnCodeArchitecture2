@@ -10,7 +10,6 @@ import java.util.LinkedHashSet;
 import com.example.self_butterknife_annotations.BindView;
 import com.google.auto.service.AutoService;
 import com.squareup.javapoet.ClassName;
-import com.squareup.javapoet.CodeBlock;
 import com.squareup.javapoet.JavaFile;
 import com.squareup.javapoet.MethodSpec;
 import com.squareup.javapoet.TypeSpec;

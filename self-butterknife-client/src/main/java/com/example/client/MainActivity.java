@@ -1,6 +1,5 @@
 package com.example.client;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.TextView;
@@ -30,10 +29,10 @@ public class MainActivity extends AppCompatActivity {
         mButton.setText("Activity1-butter-button1");
     }
 
-    void buttonClick() {
-        Intent intent = new Intent(MainActivity.this, Activity2.class);
-        startActivity(intent);
-    }
+//    void buttonClick() {
+//        Intent intent = new Intent(MainActivity.this, Activity2.class);
+//        startActivity(intent);
+//    }
 
     @Override
     protected void onDestroy() {

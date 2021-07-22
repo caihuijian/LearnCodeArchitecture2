@@ -1,7 +1,5 @@
 package com.example.self_butterknife;
 
-import android.app.Activity;
-
 import androidx.annotation.UiThread;
 
 /**
