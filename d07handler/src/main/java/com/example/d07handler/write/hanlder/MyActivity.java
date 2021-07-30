@@ -7,10 +7,12 @@ public class MyActivity extends Activity{
     private TextView mTextView;
 
     private Handler mHandler = new Handler(){
+        // 由于Handler在主线程创建 Handler构造方法Looper.myLooper时取得了主线程的Looper
+        // handleMessage在主线程执行
         public void handleMessage(Message msg) {
             System.out.println("msg.what 必定=999 "+msg.what);
             mTextView.setText((String)msg.obj);
-            System.out.println("handleMessage必定在主线程: "+Thread.currentThread());
+            System.out.println("handleMessage在主线程执行: "+Thread.currentThread());
         };
     };
 
@@ -25,6 +27,17 @@ public class MyActivity extends Activity{
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
+                // mTextView.setText("");
+                // Only the original thread that created a view hierarchy can touch its views.
+                // 子线程禁止直接操作UI
+
+                // 如果想在子线程创建Handler 需要调用Looper.prepare 否则抛出异常
+                // Can't create handler inside thread that has not called Looper.prepare()
+
+                // Looper.prepare();
+                // Handler my = new Handler();
+                // Looper.loop();
+
                 // 开启子线程
                 System.out.println("child thread "+Thread.currentThread());
                 Message message = new Message();

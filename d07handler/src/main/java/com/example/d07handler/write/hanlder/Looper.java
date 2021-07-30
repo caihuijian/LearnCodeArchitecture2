@@ -61,6 +61,7 @@ public class Looper {
             }
 
             try {
+                // 由调用sendMessage的handler调用handleMessage
                 msg.target.handleMessage(msg);
             } catch (Exception exception) {
                 throw exception;
