@@ -28,6 +28,7 @@
       <module name="CodeArchitecture2.d05selfbutterknife" target="1.8" />
       <module name="CodeArchitecture2.d07handler" target="1.8" />
       <module name="CodeArchitecture2.d08singleton" target="1.8" />
+      <module name="CodeArchitecture2.d09navigationbar" target="1.8" />
       <module name="CodeArchitecture2.self-butterknife" target="1.8" />
       <module name="CodeArchitecture2.self-butterknife-client" target="1.8" />
       <module name="CodeArchitecture2.sixprinciple" target="1.8" />
